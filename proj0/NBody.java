@@ -40,11 +40,12 @@ public class NBody{
 		StdDraw.setScale(-radius, radius);
 		StdDraw.clear();
 		StdDraw.picture(0, 0, "images/starfield.jpg", 2*radius, 2*radius);
-		/*draw the planets*/
+		/*initialize the planets*/
 		for (Planet p : plist){
 			p.draw();
 		}
 		StdDraw.enableDoubleBuffering();
+        /*draw the motion of planets*/
 		for(int time = 0; time <= T; time+=dt) {
 			double[] xForces = new double[plist.length];
 			double[] yForces = new double[plist.length];
@@ -55,13 +56,19 @@ public class NBody{
 			for (int i = 0; i<plist.length; i++){
 				plist[i].update(dt, xForces[i], yForces[i]);
 			}
-		StdDraw.picture(0, 0, "images/starfield.jpg", 2*radius, 2*radius);
-		for (Planet p : plist){
-			p.draw();
-		}
-		StdDraw.show();
-		StdDraw.pause(10);
-		}
-
+			StdDraw.picture(0, 0, "images/starfield.jpg", 2*radius, 2*radius);
+			for (Planet p : plist){
+				p.draw();
+			}
+			StdDraw.show();
+			StdDraw.pause(10);
+			}
+        StdOut.printf("%d\n", plist.length);
+		StdOut.printf("%.2e\n", radius);
+		for (int i = 0; i < plist.length; i++) {
+		    StdOut.printf("%11.4e %11.4e %11.4e %11.4e %11.4e %12s\n",
+            plist[i].xxPos, plist[i].yyPos, plist[i].xxVel,
+            plist[i].yyVel, plist[i].mass, plist[i].imgFileName);   
+            }
 	}
 }
