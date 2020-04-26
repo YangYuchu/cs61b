@@ -5,7 +5,7 @@ public class Planet{
     
 	/** instance variables initialization
 	*/
-	public static double gravity = 6.67e-11 ;
+	private static final double gravity = 6.67e-11 ;
 	public double xxPos;
 	public double yyPos;
 	public double xxVel;
