@@ -2,9 +2,10 @@
 * @author Yang Yuchu
 */
 public class Planet{
-
+    
 	/** instance variables initialization
 	*/
+	public static double gravity = 6.67e-11 ;
 	public double xxPos;
 	public double yyPos;
 	public double xxVel;
@@ -43,4 +44,13 @@ public class Planet{
     	double distance = Math.sqrt(x_distance*x_distance+y_distance*y_distance);
         return distance;
     }
+
+    /** Calculate the force
+    */
+    public double calcForceExertedBy(Planet p){
+    	double force = (gravity * mass * p.mass) / (this.calcDistance(p) * this.calcDistance(p));
+        return force;
+    }
+
+
 }
