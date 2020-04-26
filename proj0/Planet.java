@@ -52,5 +52,15 @@ public class Planet{
         return force;
     }
 
+    /** Calculate the force on x-axis and y-axis
+    */
+    public double calcForceExertedByX(Planet p){
+    	double x_force = this.calcForceExertedBy(p) * (p.xxPos-xxPos)/this.calcDistance(p);
+        return x_force;
+    }
 
+    public double calcForceExertedByY(Planet p){
+    	double y_force = this.calcForceExertedBy(p) * (p.yyPos-yyPos)/this.calcDistance(p);
+        return y_force;
+    }
 }
