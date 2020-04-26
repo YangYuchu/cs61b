@@ -83,4 +83,15 @@ public class Planet{
     	}
         return y_net_force;
     }
+
+    /** update the velocity and position
+    */
+    public void update(double dt, double fX, double fY){
+        double acc_x = fX / mass;
+        double acc_y = fY / mass;
+        xxVel += acc_x * dt;
+        yyVel += acc_y * dt;
+        xxPos += dt * xxVel;
+        yyPos += dt * yyVel;
+    }
 }
