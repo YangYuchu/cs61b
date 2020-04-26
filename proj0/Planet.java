@@ -34,4 +34,13 @@ public class Planet{
         mass = p.mass;
         imgFileName = p.imgFileName;      
     }
+
+    /** Calculate the distance
+    */
+    public double calcDistance(Planet p){
+    	double x_distance = xxPos - p.xxPos;
+    	double y_distance = yyPos - p.yyPos;
+    	double distance = Math.sqrt(x_distance*x_distance+y_distance*y_distance);
+        return distance;
+    }
 }
