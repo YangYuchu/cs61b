@@ -5,10 +5,10 @@
  */
 
 public class ArrayDeque<T> {
-    private T[] items;
+    public T[] items;
     public int size;
-    private int nextFirst;
-    private int nextLast;
+    public int nextFirst;
+    public int nextLast;
     public int len;
 
     /* reate empty list. */
@@ -40,7 +40,7 @@ public class ArrayDeque<T> {
         }
         items[nextFirst] = item;
         size ++;
-        nextFirst = (nextFirst-1)%len;
+        nextFirst = (nextFirst-1);
     }
 
     public void addLast(T item) {
@@ -49,33 +49,37 @@ public class ArrayDeque<T> {
         }
         items[nextLast] = item;
         size ++;
-        nextLast = (nextLast+1)%len;
+        nextLast = (nextLast+1);
     }
 
     public boolean isEmpty() {
         return size == 0;
     }
 
-    public void removeFirst() {
+    public T removeFirst() {
         if ((len>64) && (size==len/4)){
             resizeDown(len/2);
         }
-        items[nextFirst] = null;
+        T pop = items[nextFirst+1];
+        items[nextFirst+1] = null;
         size --;
         nextFirst = (nextFirst + 1);
+        return pop;
     }
 
-    public void removeLast() {
+    public T removeLast() {
         if ((len>64) && (size==len/4)){
             resizeDown(len/2);
         }
-        items[nextLast] = null;
+        T pop = items[nextLast-1];
+        items[nextLast-1] = null;
         size --;
         nextLast = (nextLast - 1);
+        return pop;
     }
 
     public T get(int index){
-        return items[(nextFirst+1+index)%len];
+        return items[(nextFirst+1+index)];
     }
 
     public int size() {

@@ -1,3 +1,5 @@
+import java.sql.SQLOutput;
+
 /** Performs some basic linked list tests. */
 public class ArrayDequeTest {
     /** Adds an item, then removes an item, and ensures that dll is empty afterwards. */
@@ -11,12 +13,14 @@ public class ArrayDequeTest {
 
         for(int i=0; i<300; i++){
             ad1.addFirst(i);
-            System.out.println("size: " + ad1.size + "  len: " + ad1.len + "  ratio: " + (double)ad1.size/ad1.len);
+            System.out.print(ad1.get(0) + " ");
+
+
         }
+        System.out.println();
 
         for(int i=0; i<290; i++){
-            ad1.removeFirst();
-            System.out.println("size: " + ad1.size + "  len: " + ad1.len + "  ratio: " + (double)ad1.size/ad1.len);
+            System.out.print(ad1.removeFirst() + " ");
         }
 
     }
