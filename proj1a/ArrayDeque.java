@@ -5,37 +5,29 @@
  */
 
 public class ArrayDeque<T> {
-    public T[] items;
-    public int size;
-    public int nextFirst;
-    public int nextLast;
-    public int len;
+    private T[] items;
+    private int size;
+    private int nextFirst;
+    private int nextLast;
+    private int len;
 
     /* reate empty list. */
-    public ArrayDeque(){
-        len = 64;
+    public ArrayDeque() {
+        len = 16;
         items = (T[]) new Object[len];
         size = 0;
-        nextFirst =31;
-        nextLast = 32;
+        nextFirst = 7;
+        nextLast = 8;
     }
 
-    public ArrayDeque(T x) {
-        len = 64;
-        items = (T[]) new Object[len];
-        nextFirst =30;
-        nextLast = 32;
-        items [31] = x;
-        size = 1;
-    }
 
     public void printDeque() {
-        for (int i=0; i<size; i++){
-            System.out.print(items[(nextFirst+1+i)] + " ");
+        for (int i = 0; i < size; i++) {
+            System.out.print(items[(nextFirst + 1 + i)] + " ");
         }
     }
     public void addFirst(T item) {
-        if (size == (len/2)-1){
+        if (size == (len / 2)-1){
             resizeUp(2*len);
         }
         items[nextFirst] = item;
@@ -57,25 +49,33 @@ public class ArrayDeque<T> {
     }
 
     public T removeFirst() {
-        if ((len>64) && (size==len/4)){
-            resizeDown(len/2);
+        if (size == 0) {
+            return null;
+        } else {
+            if ((len > 64) && (size == len / 4)) {
+                resizeDown(len / 2);
+            }
+            T pop = items[nextFirst + 1];
+            items[nextFirst + 1] = null;
+            size--;
+            nextFirst = (nextFirst + 1);
+            return pop;
         }
-        T pop = items[nextFirst+1];
-        items[nextFirst+1] = null;
-        size --;
-        nextFirst = (nextFirst + 1);
-        return pop;
     }
 
     public T removeLast() {
-        if ((len>64) && (size==len/4)){
-            resizeDown(len/2);
+        if (size == 0) {
+            return null;
+        } else {
+            if ((len > 64) && (size == len / 4)) {
+                resizeDown(len / 2);
+            }
+            T pop = items[nextLast - 1];
+            items[nextLast - 1] = null;
+            size--;
+            nextLast = (nextLast - 1);
+            return pop;
         }
-        T pop = items[nextLast-1];
-        items[nextLast-1] = null;
-        size --;
-        nextLast = (nextLast - 1);
-        return pop;
     }
 
     public T get(int index){

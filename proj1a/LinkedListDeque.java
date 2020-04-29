@@ -24,13 +24,6 @@ public class LinkedListDeque<T> {
 
     }
 
-    public LinkedListDeque(T x) {
-        sentinel = new TNode(null, null, null);
-        sentinel.next = new TNode(x, sentinel, sentinel);
-        sentinel.prev = sentinel.next;
-        int size = 1;
-    }
-
     public void printDeque() {
         TNode cur = sentinel;
         for (int i=0; i<size; i++){
@@ -61,27 +54,35 @@ public class LinkedListDeque<T> {
     }
 
     public T removeFirst() {
-        sentinel.next.next.prev = sentinel;
-        T pop = sentinel.next.item;
-        sentinel.next.item = null;
-        sentinel.next.prev = null;
-        TNode p =sentinel.next.next;
-        sentinel.next.next = null;
-        sentinel.next = p;
-        size --;
-        return pop;
+        if (size == 0) {
+            return null;
+        } else {
+            sentinel.next.next.prev = sentinel;
+            T pop = sentinel.next.item;
+            sentinel.next.item = null;
+            sentinel.next.prev = null;
+            TNode p = sentinel.next.next;
+            sentinel.next.next = null;
+            sentinel.next = p;
+            size--;
+            return pop;
+        }
     }
 
     public T removeLast() {
-        sentinel.prev.prev.next = sentinel;
-        T pop = sentinel.prev.item;
-        sentinel.prev.item = null;
-        sentinel.prev.next = null;
-        TNode p = sentinel.prev.prev;
-        sentinel.prev.prev = null;
-        sentinel.prev = p;
-        size --;
-        return pop;
+        if (size == 0) {
+            return null;
+        } else {
+            sentinel.prev.prev.next = sentinel;
+            T pop = sentinel.prev.item;
+            sentinel.prev.item = null;
+            sentinel.prev.next = null;
+            TNode p = sentinel.prev.prev;
+            sentinel.prev.prev = null;
+            sentinel.prev = p;
+            size--;
+            return pop;
+        }
     }
 
     public T get(int index){
@@ -102,7 +103,7 @@ public class LinkedListDeque<T> {
             return getRecursive(n.next, index-1);
         }
     }
-    public T getRecursive(int index) {
+    private T getRecursive(int index) {
         return getRecursive(sentinel, index);
     }
 }
