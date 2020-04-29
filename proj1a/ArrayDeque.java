@@ -32,7 +32,7 @@ public class ArrayDeque<T> {
         }
         items[nextFirst] = item;
         size ++;
-        nextFirst = (nextFirst-1);
+        nextFirst = (len+nextFirst-1)%len;
     }
 
     public void addLast(T item) {
@@ -41,7 +41,7 @@ public class ArrayDeque<T> {
         }
         items[nextLast] = item;
         size ++;
-        nextLast = (nextLast+1);
+        nextLast = (len+nextLast+1)%len;
     }
 
     public boolean isEmpty() {
@@ -58,7 +58,7 @@ public class ArrayDeque<T> {
             T pop = items[nextFirst + 1];
             items[nextFirst + 1] = null;
             size--;
-            nextFirst = (nextFirst + 1);
+            nextFirst = (len+nextFirst + 1)%len;
             return pop;
         }
     }
@@ -73,7 +73,7 @@ public class ArrayDeque<T> {
             T pop = items[nextLast - 1];
             items[nextLast - 1] = null;
             size--;
-            nextLast = (nextLast - 1);
+            nextLast = (len+nextLast - 1)%len;
             return pop;
         }
     }
@@ -88,7 +88,12 @@ public class ArrayDeque<T> {
     private void resizeUp(int capacity){
         T[] a = (T[]) new Object[capacity];
         int init = len*3/4;
-        System.arraycopy(items, nextFirst+1, a, init+1, size );
+        if (nextFirst<nextLast) {
+            System.arraycopy(items, nextFirst+1, a, init+1, size );
+        } else {
+            System.arraycopy(items, nextFirst+1, a, init+1, len-nextFirst-1 );
+            System.arraycopy(items, 0, a, init+len-nextFirst, nextLast );
+        }
         items = a;
         nextFirst = init;
         nextLast = nextFirst +size+1;
@@ -97,10 +102,16 @@ public class ArrayDeque<T> {
     private void resizeDown(int capacity){
         T[] a = (T[]) new Object[capacity];
         int init = len/8;
-        System.arraycopy(items, nextFirst+1, a, init+1, size );
+        if (nextFirst<nextLast) {
+            System.arraycopy(items, nextFirst + 1, a, init + 1, size);
+        } else {
+            System.arraycopy(items, nextFirst+1, a, init+1, len-nextFirst-1 );
+            System.arraycopy(items, 0, a, init+len-nextFirst, nextLast );
+        }
         items = a;
         nextFirst = init;
         nextLast = nextFirst +size+1;
         len = capacity;
+
     }
 }
