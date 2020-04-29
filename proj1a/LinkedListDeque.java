@@ -96,14 +96,14 @@ public class LinkedListDeque<T> {
     public int size() {
         return size;
     }
-    public T getRecursive(TNode n, int index) {
+    private T getRecursive(TNode n, int index) {
         if (index == 0){
             return n.next.item;
         } else {
             return getRecursive(n.next, index-1);
         }
     }
-    private T getRecursive(int index) {
+    public T getRecursive(int index) {
         return getRecursive(sentinel, index);
     }
 }

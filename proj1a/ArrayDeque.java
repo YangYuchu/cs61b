@@ -52,7 +52,7 @@ public class ArrayDeque<T> {
         if (size == 0) {
             return null;
         } else {
-            if ((len > 64) && (size == len / 4)) {
+            if ((len > 16) && (size == len / 4)) {
                 resizeDown(len / 2);
             }
             T pop = items[nextFirst + 1];
@@ -67,7 +67,7 @@ public class ArrayDeque<T> {
         if (size == 0) {
             return null;
         } else {
-            if ((len > 64) && (size == len / 4)) {
+            if ((len > 16) && (size == len / 4)) {
                 resizeDown(len / 2);
             }
             T pop = items[nextLast - 1];
